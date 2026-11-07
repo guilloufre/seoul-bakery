@@ -1013,10 +1013,23 @@ html.present-on{scroll-snap-type:y mandatory;scroll-padding-top:48px}
     var on=root.classList.contains("present-on");
     units.forEach(function(u){
       var w=u.querySelector(".wrap"); if(!w) return;
-      w.style.zoom="";
+      w.style.zoom=""; w.style.marginLeft=""; w.style.marginRight="";
+      var shr=u.querySelector(".sec-head"); if(shr) shr.style.gridTemplateColumns="";
       if(!on) return;
       var avail=window.innerHeight-48-40, h=w.scrollHeight;
-      if(h>avail) w.style.zoom=(avail/h).toFixed(3);
+      if(h>avail){
+        /* keep the content's left edge where it is unscaled, so every slide lines up vertically */
+        var left=w.getBoundingClientRect().left, pad=parseFloat(getComputedStyle(w).paddingLeft)||0, z=avail/h;
+        w.style.zoom=z.toFixed(3);
+        w.style.marginLeft=((left+pad)/z-pad).toFixed(1)+"px";
+        w.style.marginRight="0";
+        /* keep the title column at the same screen x on every slide */
+        var sh=u.querySelector(".sec-head");
+        if(sh){ var cols=getComputedStyle(sh).gridTemplateColumns.split(" ");
+          if(cols.length===2){ var gap=parseFloat(getComputedStyle(sh).columnGap)||0, base=150;
+            sh.style.gridTemplateColumns=((base+gap)/z-gap).toFixed(1)+"px minmax(0,1fr)"; } }
+      }
+      else { var sh0=u.querySelector(".sec-head"); if(sh0) sh0.style.gridTemplateColumns=""; }
     });
   }
   function setPresent(on){
