@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1920, height=1080">
+<title>Samcheong Cinematic Intro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=block" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<style>
+:root{--cream:#F6F0E6;--ink:#2B1D14;--car:#B5651D;--car2:#D9A066;--sage:#7D8B6A;--gold:#FFC977}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#120b07}
+#root{position:relative;width:1920px;height:1080px;overflow:hidden;background:#120b07;font-family:'Noto Serif KR',serif;color:var(--cream)}
+.scene{position:absolute;inset:0;opacity:0;overflow:hidden}
+.cam{position:absolute;inset:0;transform-origin:50% 50%}
+.layer{position:absolute;inset:-60px}
+svg.full{position:absolute;inset:0;width:100%;height:100%}
+.txt{position:absolute;left:0;right:0;text-align:center;text-shadow:0 2px 30px rgba(20,10,4,.55)}
+.lab{font-family:'Playfair Display','Noto Serif KR',serif;font-size:22px;letter-spacing:.5em;color:var(--car2);font-weight:400;padding-left:.5em}
+.head{font-size:68px;font-weight:600;letter-spacing:.02em;line-height:1.35}
+.small{font-size:32px;font-weight:600;letter-spacing:.3em;color:#fff3df;padding-left:.3em;text-shadow:0 0 18px rgba(20,10,4,.95),0 2px 6px rgba(20,10,4,.9),0 0 40px rgba(20,10,4,.8)}
+.big{font-size:230px;font-weight:900;letter-spacing:.06em;line-height:1;color:#fff4e2;padding-left:.06em}
+.glow{position:absolute;border-radius:50%;pointer-events:none}
+.mote{position:absolute;border-radius:50%;background:#ffe9c4}
+.steam{position:absolute;width:160px;height:520px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(255,248,235,.42),rgba(255,248,235,0) 65%);filter:blur(18px)}
+#leak{position:absolute;inset:0;z-index:6;pointer-events:none;opacity:0;mix-blend-mode:screen;background:radial-gradient(ellipse 70% 90% at 15% 40%,rgba(255,180,90,.95),rgba(255,120,40,.4) 40%,rgba(0,0,0,0) 75%)}
+#leak2{position:absolute;inset:0;z-index:6;pointer-events:none;opacity:0;mix-blend-mode:screen;background:radial-gradient(ellipse 60% 80% at 85% 60%,rgba(255,200,120,.95),rgba(217,160,102,.4) 45%,rgba(0,0,0,0) 75%)}
+#creamwash{position:absolute;inset:0;z-index:5;background:var(--cream);opacity:0;pointer-events:none}
+#vign{position:absolute;inset:0;z-index:7;pointer-events:none;background:radial-gradient(ellipse at center,rgba(0,0,0,0) 50%,rgba(20,10,4,.55) 100%)}
+#grain{position:absolute;inset:-100px;z-index:8;pointer-events:none;opacity:.13;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>");background-size:300px 300px}
+.bar{position:absolute;left:0;right:0;height:64px;background:#0a0604;z-index:9}
+#topbar{top:0}#botbar{bottom:0}
+#s6 .txt{text-shadow:none}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="30" data-width="1920" data-height="1080">
+
+<!-- S1: golden-hour hanok roofline + steam -->
+<div class="scene" id="s1"><div class="cam">
+  <div class="layer" id="s1sky" style="background:linear-gradient(180deg,#7a3d1c 0%,#c9762f 32%,#f0b060 58%,#f7d9a0 78%,#f6f0e6 100%)"></div>
+  <div class="glow" id="s1sun" style="left:1180px;top:330px;width:520px;height:520px;background:radial-gradient(circle,rgba(255,240,200,1) 0%,rgba(255,200,110,.75) 18%,rgba(255,160,70,.25) 45%,rgba(255,140,60,0) 70%)"></div>
+  <div class="layer" id="s1far">
+    <svg class="full" viewBox="0 0 2040 1200" preserveAspectRatio="none">
+      <path d="M0 860 C200 800 380 820 560 790 C760 760 900 820 1100 800 C1320 780 1500 740 1700 770 C1860 790 1960 780 2040 790 L2040 1200 L0 1200Z" fill="#8a4a24" opacity=".55"/>
+    </svg>
+  </div>
+  <div class="layer" id="s1roof">
+    <svg class="full" viewBox="0 0 2040 1200" preserveAspectRatio="none">
+      <defs><linearGradient id="rf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a2416"/><stop offset="1" stop-color="#1c120b"/></linearGradient></defs>
+      <!-- big hanok roof with upturned eaves -->
+      <path d="M-40 760 C120 770 260 740 380 690 C520 640 640 610 760 600 L1280 600 C1400 610 1520 640 1660 690 C1780 740 1920 770 2080 760 L2080 830 C1900 840 1760 820 1640 790 L400 790 C280 820 140 840 -40 830Z" fill="url(#rf)"/>
+      <path d="M720 600 C820 560 900 548 1020 546 C1140 548 1220 560 1320 600Z" fill="#2a1a10"/>
+      <rect x="980" y="520" width="80" height="30" rx="6" fill="#2a1a10"/>
+      <!-- roof tile lines -->
+      <g stroke="#5a3a24" stroke-width="3" opacity=".7">
+        <path d="M420 780 L800 612"/><path d="M520 782 L860 610"/><path d="M620 784 L920 608"/><path d="M720 786 L980 606"/>
+        <path d="M1620 780 L1240 612"/><path d="M1520 782 L1180 610"/><path d="M1420 784 L1120 608"/><path d="M1320 786 L1060 606"/>
+        <path d="M820 788 L1020 606"/><path d="M920 789 L1030 606"/><path d="M1220 788 L1020 606"/><path d="M1120 789 L1010 606"/>
+      </g>
+      <!-- eaves & body -->
+      <rect x="400" y="790" width="1240" height="26" fill="#140c07"/>
+      <rect x="430" y="816" width="1180" height="400" fill="#24170e"/>
+      <g fill="#3b2617"><rect x="470" y="816" width="26" height="400"/><rect x="760" y="816" width="26" height="400"/><rect x="1007" y="816" width="26" height="400"/><rect x="1254" y="816" width="26" height="400"/><rect x="1544" y="816" width="26" height="400"/></g>
+      <!-- warm windows -->
+      <g fill="#f2a24c" opacity=".85"><rect x="520" y="880" width="210" height="190"/><rect x="810" y="880" width="170" height="190"/><rect x="1060" y="880" width="170" height="190"/><rect x="1310" y="880" width="210" height="190"/></g>
+      <g stroke="#3b2617" stroke-width="5" fill="none">
+        <path d="M520 943h210M520 1006h210M590 880v190M660 880v190"/><path d="M810 943h170M810 1006h170M867 880v190M923 880v190"/>
+        <path d="M1060 943h170M1060 1006h170M1117 880v190M1173 880v190"/><path d="M1310 943h210M1310 1006h210M1380 880v190M1450 880v190"/>
+      </g>
+    </svg>
+  </div>
+  <div id="s1steam"></div>
+  <div class="txt" id="s1t" style="top:190px"><div class="lab" style="color:#fff0d8">서울 · 제과 상권</div><div class="head" style="margin-top:28px;font-size:74px">3년 뒤, 서울에서 빵이<br>가장 잘 될 골목은?</div></div>
+</div></div>
+
+<!-- S2: night map 149 points -->
+<div class="scene" id="s2"><div class="cam" id="s2cam">
+  <div class="layer" style="background:radial-gradient(ellipse at 50% 45%,#2a1a10 0%,#140b06 60%,#0b0604 100%)"></div>
+  <svg class="full" viewBox="0 0 1920 1080" id="s2map">
+    <path d="M140 700 C380 640 520 720 760 660 C980 600 1120 690 1340 640 C1540 600 1680 660 1800 620" stroke="#3d4a3a" stroke-width="34" fill="none" opacity=".55" stroke-linecap="round"/>
+    <path d="M300 520 C420 300 760 200 980 220 C1260 240 1560 330 1640 560 C1700 760 1440 900 1120 920 C800 940 420 880 320 720 C280 650 280 580 300 520Z" fill="none" stroke="#5a3d26" stroke-width="2" stroke-dasharray="6 10" opacity=".7"/>
+    <g id="dots"></g>
+    <circle id="hot" cx="930" cy="370" r="9" fill="#ffd08a"/>
+  </svg>
+  <div class="glow" id="hotglow" style="left:810px;top:250px;width:240px;height:240px;background:radial-gradient(circle,rgba(255,200,120,.95) 0%,rgba(217,160,102,.45) 25%,rgba(181,101,29,0) 70%)"></div>
+  <div class="txt" id="s2t" style="top:800px"><div class="lab">서울 · 2023–2026</div><div class="head" style="margin-top:22px;letter-spacing:.12em">149개 상권 · 3년 데이터</div></div>
+</div></div>
+
+<!-- S3/S4: lantern alley -->
+<div class="scene" id="s3"><div class="cam" id="s3cam">
+  <div class="layer" id="s3sky" style="background:linear-gradient(180deg,#1d1a2a 0%,#3a2a32 30%,#7a4a30 60%,#2a1a10 100%)"></div>
+  <div class="layer" id="s3back">
+    <svg class="full" viewBox="0 0 2040 1200" preserveAspectRatio="none">
+      <!-- far roofs at vanishing point -->
+      <path d="M760 560 C860 520 940 510 1020 510 C1100 510 1180 520 1280 560 L1280 600 L760 600Z" fill="#1a110b"/>
+      <rect x="800" y="600" width="440" height="200" fill="#20150d"/>
+      <rect x="930" y="640" width="180" height="120" fill="#e8a050" opacity=".7"/>
+    </svg>
+  </div>
+  <div class="layer" id="s3walls">
+    <svg class="full" viewBox="0 0 2040 1200" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="wl" x1="0" x2="1"><stop offset="0" stop-color="#140c07"/><stop offset="1" stop-color="#3b2516"/></linearGradient>
+        <linearGradient id="wr" x1="1" x2="0"><stop offset="0" stop-color="#140c07"/><stop offset="1" stop-color="#3b2516"/></linearGradient>
+        <linearGradient id="gr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a3a22"/><stop offset="1" stop-color="#1a110a"/></linearGradient>
+      </defs>
+      <path d="M0 1200 L800 800 L1240 800 L2040 1200Z" fill="url(#gr)"/>
+      <path d="M0 0 L0 1200 L800 800 L800 560 L0 300Z" fill="url(#wl)"/>
+      <path d="M2040 0 L2040 1200 L1240 800 L1240 560 L2040 300Z" fill="url(#wr)"/>
+      <!-- eaves -->
+      <path d="M-40 260 C200 300 500 420 820 540 L820 560 C500 450 200 340 -40 320Z" fill="#0d0805"/>
+      <path d="M2080 260 C1840 300 1540 420 1220 540 L1220 560 C1540 450 1840 340 2080 320Z" fill="#0d0805"/>
+      <!-- lit lattice windows -->
+      <g fill="#f0a050" opacity=".75"><path d="M140 560 L380 620 L380 860 L140 860Z"/><path d="M1900 560 L1660 620 L1660 860 L1900 860Z"/><path d="M560 680 L680 710 L680 820 L560 840Z" opacity=".7"/><path d="M1480 680 L1360 710 L1360 820 L1480 840Z" opacity=".7"/></g>
+      <g stroke="#2a190e" stroke-width="5"><path d="M260 590 V860 M140 710 L380 740"/><path d="M1780 590 V860 M1900 710 L1660 740"/></g>
+      <!-- stone wall texture -->
+      <g stroke="#4a3220" stroke-width="2" opacity=".5" fill="none"><path d="M0 980 L800 740"/><path d="M0 1060 L800 770"/><path d="M2040 980 L1240 740"/><path d="M2040 1060 L1240 770"/></g>
+    </svg>
+  </div>
+  <div id="lanterns"></div>
+  <div id="bokeh"></div>
+  <div class="txt" id="s3t" style="top:260px"><div class="lab">1위 상권</div><div class="big" style="margin-top:26px">삼청동</div><div class="small" style="margin-top:34px">84.8점 · 1위</div></div>
+  <div class="txt" id="s4a" style="top:300px"><div class="lab">제과 매출 CAGR</div><div class="head" style="margin-top:26px">제과 매출 연 <span style="font-family:'Playfair Display',serif;font-size:120px;color:#ffd79a">5.9%</span> 성장</div><div class="small" style="margin-top:20px">서울 평균의 4배</div></div>
+  <div class="txt" id="s4b" style="top:720px"><div class="head" style="font-size:54px;letter-spacing:.14em">폐업률 <span style="font-family:'Playfair Display',serif;color:#ffd79a">0%</span></div></div>
+</div></div>
+
+<!-- S5: oven glow through changho lattice -->
+<div class="scene" id="s5"><div class="cam" id="s5cam">
+  <div class="layer" style="background:#1a0e07"></div>
+  <div class="glow" id="oven" style="left:360px;top:120px;width:1200px;height:900px;background:radial-gradient(ellipse,rgba(255,170,70,1) 0%,rgba(230,110,30,.75) 30%,rgba(140,55,15,.3) 60%,rgba(0,0,0,0) 75%)"></div>
+  <div class="layer" id="s5bread">
+    <svg class="full" viewBox="0 0 2040 1200" preserveAspectRatio="none">
+      <defs><radialGradient id="bg1" cx=".45" cy=".35" r=".7"><stop offset="0" stop-color="#e8a55a"/><stop offset=".6" stop-color="#a85a20"/><stop offset="1" stop-color="#5a2a0c"/></radialGradient></defs>
+      <rect x="0" y="930" width="2040" height="300" fill="#2a170c"/>
+      <rect x="0" y="920" width="2040" height="16" fill="#4a2a14"/>
+      <g fill="url(#bg1)">
+        <ellipse cx="620" cy="900" rx="190" ry="70"/><ellipse cx="1020" cy="890" rx="230" ry="82"/><ellipse cx="1420" cy="900" rx="180" ry="66"/>
+        <ellipse cx="300" cy="912" rx="110" ry="48"/><ellipse cx="1740" cy="912" rx="120" ry="50"/>
+      </g>
+      <g stroke="#f6d6a0" stroke-width="7" fill="none" opacity=".75" stroke-linecap="round">
+        <path d="M520 880 q40 -30 80 0"/><path d="M620 875 q40 -30 80 0"/>
+        <path d="M900 870 q50 -36 100 0"/><path d="M1020 866 q50 -36 100 0"/>
+        <path d="M1340 880 q40 -30 80 0"/><path d="M1440 880 q40 -30 70 0"/>
+      </g>
+    </svg>
+  </div>
+  <div id="s5steam"></div>
+  <div class="layer" id="s5lattice">
+    <svg class="full" viewBox="0 0 2040 1200" preserveAspectRatio="none">
+      <defs><pattern id="lat" width="90" height="90" patternUnits="userSpaceOnUse"><rect width="90" height="90" fill="none" stroke="#1a0d06" stroke-width="12"/><path d="M45 0 V90 M0 45 H90" stroke="#1a0d06" stroke-width="5"/></pattern></defs>
+      <rect x="0" y="0" width="2040" height="1200" fill="url(#lat)" opacity=".9"/>
+      <rect x="0" y="0" width="2040" height="1200" fill="none" stroke="#120904" stroke-width="80"/>
+      <rect x="990" y="0" width="60" height="1200" fill="#120904"/>
+    </svg>
+  </div>
+  <div id="flour"></div>
+  <div class="txt" id="s5t" style="top:300px"><div class="lab" style="color:#ffe0b0">출점 제안</div><div class="head" style="margin-top:26px;font-size:84px;color:#fff3df">한옥 쇼베이킹 플래그십</div><div class="small" style="margin-top:30px">굽는 장면이 간판이 된다</div></div>
+</div></div>
+
+<!-- S6: dusk exterior, fade to cream -->
+<div class="scene" id="s6"><div class="cam" id="s6cam">
+  <div class="layer" style="background:linear-gradient(180deg,#3a3550 0%,#8a5a5a 35%,#d9965a 62%,#f2c88a 80%,#f6f0e6 100%)"></div>
+  <div class="layer" id="s6hill"><svg class="full" viewBox="0 0 2040 1200" preserveAspectRatio="none">
+    <path d="M0 720 C260 600 520 640 760 580 C1000 520 1240 600 1480 560 C1720 520 1900 600 2040 620 L2040 1200 L0 1200Z" fill="#5a4a46" opacity=".6"/>
+    <path d="M0 800 C300 740 600 780 900 740 C1200 700 1600 760 2040 730 L2040 1200 L0 1200Z" fill="#4a5440" opacity=".75"/>
+  </svg></div>
+  <div class="layer" id="s6houses"><svg class="full" viewBox="0 0 2040 1200" preserveAspectRatio="none">
+    <g fill="#24170e">
+      <path d="M80 880 C160 870 220 850 280 820 L560 820 C620 850 680 870 760 880 L760 900 L80 900Z"/><rect x="130" y="900" width="580" height="300"/>
+      <path d="M700 840 C800 830 880 800 960 760 L1300 760 C1380 800 1460 830 1560 840 L1560 866 L700 866Z"/><rect x="760" y="866" width="740" height="340"/>
+      <path d="M1460 900 C1530 890 1590 870 1640 845 L1880 845 C1930 870 1990 890 2060 900 L2060 920 L1460 920Z"/><rect x="1500" y="920" width="520" height="300"/>
+    </g>
+    <g fill="#f2a24c" opacity=".9"><rect x="200" y="950" width="120" height="110"/><rect x="460" y="950" width="140" height="110"/><rect x="860" y="920" width="200" height="160"/><rect x="1180" y="920" width="200" height="160"/><rect x="1580" y="960" width="130" height="100"/><rect x="1800" y="960" width="130" height="100"/></g>
+  </svg></div>
+  <div id="s6lan"></div>
+</div>
+</div>
+
+<div id="creamwash"></div>
+<div class="txt" id="s6t" style="top:400px;color:var(--ink);z-index:6"><div class="lab" style="color:var(--car)">삼청동 · 2029</div><div class="head" style="margin-top:30px;font-size:80px;font-weight:700">삼청동에서, 3년 뒤를 굽는다.</div><div id="src" style="position:absolute;left:0;right:0;top:500px;font-size:22px;letter-spacing:.12em;color:#7a6656">출처: 서울시 상권분석서비스, 2023–2026 2분기</div></div>
+<div id="leak"></div><div id="leak2"></div>
+<div id="vign"></div>
+<div id="grain"></div>
+<div class="bar" id="topbar"></div><div class="bar" id="botbar"></div>
+</div>
+
+<script>
+(function(){
+  const $=s=>document.querySelector(s);
+  let seed=7;const R=()=>{seed=(seed*16807)%2147483647;return (seed-1)/2147483646;};
+  const tl=gsap.timeline({paused:true,defaults:{ease:'power2.out'}});
+  const mk=(parent,cls,css)=>{const d=document.createElement('div');d.className=cls;Object.assign(d.style,css);$(parent).appendChild(d);return d;};
+
+  // grain jitter (deterministic)
+  const g={t:0};
+  tl.to(g,{t:900,duration:30,ease:'none',onUpdate(){const k=Math.floor(g.t)%9;$('#grain').style.transform=`translate(${(k*37)%90-45}px,${(k*61)%90-45}px)`;}},0);
+
+  // scene crossfades: [id, in, out]
+  const sc=[['#s1',0,5.4],['#s2',4.6,10.6],['#s3',10.0,20.4],['#s5',19.6,25.4],['#s6',24.6,30]];
+  sc.forEach(([id,a,b],i)=>{
+    if(i===0) tl.set(id,{opacity:1},0); else tl.fromTo(id,{opacity:0},{opacity:1,duration:1.0,ease:'sine.inOut'},a);
+    if(b<30) tl.to(id,{opacity:0,duration:1.0,ease:'sine.inOut'},b-0.2);
+  });
+  // light leaks at transitions
+  [[4.5,'#leak'],[19.4,'#leak2'],[24.4,'#leak']].forEach(([t,id])=>{tl.fromTo(id,{opacity:0},{opacity:.75,duration:.7,ease:'sine.in'},t);tl.to(id,{opacity:0,duration:1.2,ease:'sine.out'},t+.7);});
+  tl.fromTo('#leak2',{opacity:0},{opacity:.45,duration:.8,ease:'sine.in'},9.8);tl.to('#leak2',{opacity:0,duration:1.2},10.6);
+
+  // ---------- S1 ----------
+  tl.fromTo('#s1 .cam',{scale:1.0},{scale:1.08,duration:6,ease:'none'},0);
+  tl.fromTo('#s1sky',{y:0},{y:-20,duration:6,ease:'none'},0);
+  tl.fromTo('#s1sun',{y:30,opacity:.85},{y:-10,opacity:1,duration:6,ease:'none'},0);
+  tl.fromTo('#s1roof',{y:30,x:-10},{y:-10,x:10,duration:6,ease:'none'},0);
+  tl.fromTo('#s1far',{y:10},{y:-5,duration:6,ease:'none'},0);
+  for(let i=0;i<7;i++){const s=mk('#s1steam','steam',{left:(560+i*140)+'px',top:'560px',opacity:0});
+    const d=2.6+R()*1.4, st=R()*2.2;
+    tl.fromTo(s,{y:120,x:0,scaleX:.6,opacity:0},{y:-380,x:(R()-.5)*120,scaleX:1.5,opacity:.9,duration:d*0.5,ease:'sine.out'},st);
+    tl.to(s,{y:-620,opacity:0,duration:d*0.6,ease:'sine.in'},st+d*0.5);
+  }
+  for(let i=0;i<40;i++){const m=mk('#s1steam','mote',{left:(R()*1920)+'px',top:(200+R()*700)+'px',width:(2+R()*4)+'px',height:'0px',opacity:0});m.style.height=m.style.width;
+    tl.fromTo(m,{opacity:0,y:0},{opacity:.5+R()*.4,y:-60-R()*80,x:(R()-.5)*60,duration:5,ease:'sine.inOut'},R()*.8);}
+  tl.from('#s1t .lab',{opacity:0,y:16,duration:1.2},.4);
+  tl.from('#s1t .head',{opacity:0,y:30,filter:'blur(12px)',duration:1.8},.8);
+
+  // ---------- S2 ----------
+  const NS='http://www.w3.org/2000/svg', dots=$('#dots');const dl=[];
+  for(let i=0;i<148;i++){let x,y;do{x=320+R()*1300;y=240+R()*660;}while(((x-970)/680)**2+((y-570)/340)**2>1 || (Math.abs(x-930)<40&&Math.abs(y-370)<40));
+    const c=document.createElementNS(NS,'circle');c.setAttribute('cx',x);c.setAttribute('cy',y);c.setAttribute('r',2+R()*2.5);c.setAttribute('fill',R()<.2?'#d9a066':'#a08060');c.setAttribute('opacity',0);dots.appendChild(c);dl.push(c);}
+  dl.forEach((c,i)=>tl.to(c,{attr:{opacity:.25+R()*.4},duration:.6},5.0+R()*1.6));
+  tl.fromTo('#hot',{attr:{r:0}},{attr:{r:9},duration:.6,ease:'back.out(3)'},6.6);
+  tl.fromTo('#hotglow',{opacity:0,scale:.3},{opacity:1,scale:1,duration:1.4},6.6);
+  tl.to('#hotglow',{scale:1.25,duration:.8,yoyo:true,repeat:3,ease:'sine.inOut'},8.0);
+  tl.fromTo('#s2cam',{scale:1.0},{scale:1.08,duration:5,ease:'none',transformOrigin:'930px 370px'},4.6);
+  tl.to('#s2cam',{scale:5,duration:1.4,ease:'power2.in',transformOrigin:'930px 370px'},9.6);
+  tl.from('#s2t .lab',{opacity:0,y:14,duration:1},5.6);
+  tl.from('#s2t .head',{opacity:0,y:24,filter:'blur(10px)',duration:1.6},5.9);
+  tl.to('#s2t',{opacity:0,duration:.5},9.4);
+
+  // ---------- S3 / S4 alley ----------
+  const lanPos=[[300,330,1],[620,470,.75],[790,545,.5],[1740,330,1],[1420,470,.75],[1250,545,.5]];
+  lanPos.forEach(([x,y,s],i)=>{
+    const gl=mk('#lanterns','glow',{left:(x-180*s)+'px',top:(y-180*s)+'px',width:(360*s)+'px',height:(360*s)+'px',background:'radial-gradient(circle,rgba(255,190,100,.85) 0%,rgba(230,120,40,.35) 30%,rgba(0,0,0,0) 70%)'});
+    const l=mk('#lanterns','',{position:'absolute',left:(x-28*s)+'px',top:(y-40*s)+'px',width:(56*s)+'px',height:(80*s)+'px',borderRadius:'45%',background:'radial-gradient(ellipse at 50% 45%,#fff2d0,#ffb45a 45%,#c0501a)',boxShadow:`0 0 ${40*s}px #ffa040`});
+    tl.to(gl,{opacity:.75,duration:.35+R()*.3,yoyo:true,repeat:13,ease:'sine.inOut'},10.4+R());
+  });
+  for(let i=0;i<26;i++){const sz=20+R()*70;const b=mk('#bokeh','glow',{left:(R()*1920)+'px',top:(150+R()*800)+'px',width:sz+'px',height:sz+'px',background:'radial-gradient(circle,rgba(255,200,130,.55),rgba(255,160,80,0) 70%)',opacity:0});
+    tl.fromTo(b,{opacity:0,y:20},{opacity:.4+R()*.5,y:-80-R()*80,x:(R()-.5)*80,duration:8,ease:'sine.inOut'},11+R()*3);}
+  tl.fromTo('#s3cam',{scale:1.14},{scale:1.0,duration:1.6,ease:'power3.out'},10.0);
+  tl.to('#s3cam',{scale:1.08,duration:8.8,ease:'none'},11.6);
+  tl.fromTo('#s3walls',{x:0},{x:-30,duration:10,ease:'none'},10);
+  tl.fromTo('#s3back',{x:0},{x:-10,duration:10,ease:'none'},10);
+  tl.fromTo('#lanterns',{x:0},{x:-45,duration:10,ease:'none'},10);
+  tl.fromTo('#bokeh',{x:0},{x:-80,duration:10,ease:'none'},10);
+  tl.fromTo('#s3sky',{filter:'brightness(.85)'},{filter:'brightness(1.25) saturate(1.2)',duration:3,ease:'sine.inOut'},14.5);
+  tl.from('#s3t .lab',{opacity:0,y:14,duration:1},10.8);
+  tl.from('#s3t .big',{opacity:0,scale:1.12,filter:'blur(16px)',duration:2,ease:'power3.out'},11.0);
+  tl.from('#s3t .small',{opacity:0,y:16,duration:1.2},12.2);
+  tl.to('#s3t',{opacity:0,y:-30,filter:'blur(8px)',duration:1},14.6);
+  tl.from('#s4a .lab',{opacity:0,y:14,duration:1},15.4);
+  tl.from('#s4a .head',{opacity:0,y:40,filter:'blur(12px)',duration:1.8},15.6);
+  tl.from('#s4a .small',{opacity:0,y:20,duration:1.2},16.6);
+  tl.from('#s4b',{opacity:0,y:40,filter:'blur(10px)',duration:1.6},17.3);
+  tl.to('#s4a',{y:-20,duration:4,ease:'none'},16);
+  tl.to('#s4b',{y:-14,duration:1.5,ease:'none'},18.9);
+
+  // ---------- S5 oven ----------
+  tl.fromTo('#s5cam',{scale:1.0},{scale:1.08,duration:6,ease:'none'},19.6);
+  tl.fromTo('#s5lattice',{x:20},{x:-30,duration:6,ease:'none'},19.6);
+  tl.fromTo('#s5bread',{x:-10},{x:10,duration:6,ease:'none'},19.6);
+  tl.fromTo('#oven',{opacity:.7},{opacity:1,duration:.5,yoyo:true,repeat:11,ease:'sine.inOut'},19.6);
+  for(let i=0;i<6;i++){const s=mk('#s5steam','steam',{left:(520+i*180)+'px',top:'420px',opacity:0});const st=19.8+R()*2.4;
+    tl.fromTo(s,{y:200,opacity:0,scaleX:.6},{y:-120,opacity:.85,scaleX:1.4,duration:1.6,ease:'sine.out'},st);tl.to(s,{y:-400,opacity:0,duration:1.8,ease:'sine.in'},st+1.6);}
+  for(let i=0;i<70;i++){const sz=2+R()*5;const m=mk('#flour','mote',{left:(R()*1920)+'px',top:(100+R()*900)+'px',width:sz+'px',height:sz+'px',opacity:0,boxShadow:'0 0 6px rgba(255,230,190,.8)'});
+    tl.fromTo(m,{opacity:0,y:0,x:0},{opacity:.4+R()*.6,y:(R()-.6)*160,x:(R()-.3)*140,duration:5.6,ease:'sine.inOut'},19.6+R()*.8);}
+  tl.from('#s5t .lab',{opacity:0,y:14,duration:1},20.4);
+  tl.from('#s5t .head',{opacity:0,y:30,filter:'blur(12px)',duration:1.8},20.6);
+  tl.from('#s5t .small',{opacity:0,y:16,duration:1.2},21.8);
+
+  // ---------- S6 dusk, fade to cream ----------
+  for(let i=0;i<5;i++){const x=200+i*400,y=820+((i%2)*40);mk('#s6lan','glow',{left:(x-60)+'px',top:(y-60)+'px',width:'120px',height:'120px',background:'radial-gradient(circle,rgba(255,200,110,.95),rgba(255,140,50,0) 65%)'});}
+  tl.fromTo('#s6cam',{scale:1.12},{scale:1.0,duration:5.4,ease:'power1.out'},24.6);
+  tl.fromTo('#s6houses',{y:-20},{y:20,duration:5.4,ease:'none'},24.6);
+  tl.fromTo('#s6hill',{y:-6},{y:6,duration:5.4,ease:'none'},24.6);
+  tl.fromTo('#creamwash',{opacity:0},{opacity:.82,duration:2.2,ease:'sine.inOut'},25.8);
+  tl.from('#s6t .lab',{opacity:0,y:14,duration:1},26.4);
+  tl.from('#s6t .head',{opacity:0,y:30,filter:'blur(12px)',duration:1.8},26.6);
+  tl.from('#src',{opacity:0,duration:1},27.6);
+  tl.to('#vign',{opacity:.4,duration:2},26);
+  tl.to({},{duration:0},30);
+
+  window.__timelines=window.__timelines||{};
+  window.__timelines['main']=tl;
+  window.__tl=tl;
+  window.__seek=t=>{tl.seek(t,false);};
+  const standalone=!/[?&]render/.test(location.search) && !navigator.webdriver;
+  document.fonts.ready.then(()=>{window.__ready=true; if(standalone){tl.play(0);}});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "historyId": "c5be52da-63e6-454c-9864-2cf16f8ec268",
+  "currentRevision": "dbd4c65d-937e-4140-b353-e2d9a2d5ed37",
+  "pendingChanges": false,
+  "files": {
+    "index.html": {
+      "hash": "515099e420d5cb66a17444b08bb50fc898ec930750f46a15abae6570f77b6d38",
+      "content": "C:\\Users\\user\\Desktop\\과제\\video\\.hf-cache\\history\\c5be52da-63e6-454c-9864-2cf16f8ec268\\blobs\\51\\515099e420d5cb66a17444b08bb50fc898ec930750f46a15abae6570f77b6d38"
+    }
+  },
+  "revisions": {
+    "47833b4e-7ff3-47f3-b09f-58d9bd880c88": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1794026433685,
+      "endedAt": 1794026433686,
+      "files": {
+        "index.html": {
+          "before": "C:\\Users\\user\\Desktop\\과제\\video\\.hf-cache\\history\\c5be52da-63e6-454c-9864-2cf16f8ec268\\blobs\\df\\dfcf287fd38b3aade723fe42f81f34159bf4f40029bca6db0116c1154b577287",
+          "after": "C:\\Users\\user\\Desktop\\과제\\video\\.hf-cache\\history\\c5be52da-63e6-454c-9864-2cf16f8ec268\\blobs\\40\\40817956a4e39515949eb738c6cc365d45b5e8a7fdbda2c30c02e3034f003167"
+        }
+      }
+    },
+    "dbd4c65d-937e-4140-b353-e2d9a2d5ed37": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1794026536568,
+      "endedAt": 1794026536570,
+      "files": {
+        "index.html": {
+          "before": "C:\\Users\\user\\Desktop\\과제\\video\\.hf-cache\\history\\c5be52da-63e6-454c-9864-2cf16f8ec268\\blobs\\40\\40817956a4e39515949eb738c6cc365d45b5e8a7fdbda2c30c02e3034f003167",
+          "after": "C:\\Users\\user\\Desktop\\과제\\video\\.hf-cache\\history\\c5be52da-63e6-454c-9864-2cf16f8ec268\\blobs\\51\\515099e420d5cb66a17444b08bb50fc898ec930750f46a15abae6570f77b6d38"
+        }
+      }
+    }
+  },
+  "checks": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "snapshots": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "renders": {
+    "latest": {
+      "id": "a5cded46-d4b7-4828-b6b7-cd7885c01f8e",
+      "completedAt": 1794026615290,
+      "output": "C:\\Users\\user\\Desktop\\과제\\video\\intro_cine.mp4",
+      "status": "completed",
+      "revision": "dbd4c65d-937e-4140-b353-e2d9a2d5ed37"
+    },
+    "retainedRevisions": [
+      "dbd4c65d-937e-4140-b353-e2d9a2d5ed37",
+      "47833b4e-7ff3-47f3-b09f-58d9bd880c88"
+    ]
+  },
+  "pendingArtifactCleanup": []
+}
