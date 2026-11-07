@@ -1,0 +1,7 @@
+node_modules/
+video/.hf-cache/
+video/intro_full.mp4
+video/intro_web.mp4
+data/
+analysis/top10.txt
+video/.hyperframes/

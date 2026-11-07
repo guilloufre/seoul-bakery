@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1920, height=1080">
+<title>Samcheong Bakery Intro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400;1,600&display=block" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<style>
+:root{--paper:#F6F0E6;--ink:#2B1D14;--car:#B5651D;--sage:#7D8B6A;--mute:#8a7a6b;}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1920px;height:1080px;overflow:hidden;background:var(--paper)}
+#root{position:relative;width:1920px;height:1080px;overflow:hidden;background:var(--paper);color:var(--ink);font-family:'Noto Serif KR',serif}
+.scene{position:absolute;inset:0;opacity:0}
+.label{font-family:'Playfair Display','Noto Serif KR',serif;font-size:22px;letter-spacing:.32em;text-transform:uppercase;color:var(--car);font-weight:600}
+.klabel{font-size:24px;letter-spacing:.18em;color:var(--mute);font-weight:400}
+.num{font-family:'Playfair Display','Noto Serif KR',serif;font-weight:600;letter-spacing:.12em;font-size:28px;color:var(--car)}
+.rule{position:absolute;height:1px;background:var(--ink);transform-origin:left center}
+.rule.thick{height:6px}
+/* frame chrome */
+#chrome{position:absolute;inset:0;pointer-events:none;z-index:5}
+#chrome .top{position:absolute;left:120px;right:120px;top:70px;display:flex;justify-content:space-between;font-family:'Playfair Display','Noto Serif KR',serif;font-size:20px;letter-spacing:.24em;color:var(--ink)}
+#chrome .bot{position:absolute;left:120px;right:120px;bottom:60px;display:flex;justify-content:space-between;font-family:'Playfair Display','Noto Serif KR',serif;font-size:20px;letter-spacing:.24em;color:var(--mute)}
+#prog{position:absolute;left:120px;bottom:100px;height:2px;width:1680px;background:rgba(43,29,20,.12)}
+#progbar{height:100%;width:100%;background:var(--car);transform-origin:left}
+#grain{position:absolute;inset:-60px;z-index:9;pointer-events:none;opacity:.22;mix-blend-mode:multiply}
+#vign{position:absolute;inset:0;z-index:8;pointer-events:none;background:radial-gradient(ellipse at center,rgba(0,0,0,0) 55%,rgba(60,35,15,.16) 100%)}
+.line{display:block;overflow:hidden}
+.line>span{display:inline-block}
+/* s1 */
+#s1 .hook{position:absolute;left:120px;top:330px;font-size:104px;font-weight:700;line-height:1.28;letter-spacing:-.02em}
+#s1 .hook em{font-style:normal;color:var(--car)}
+#s1 .lab{position:absolute;left:120px;top:250px}
+#s1 svg{position:absolute;right:140px;top:250px}
+/* s2 */
+#s2 .num{position:absolute;left:120px;top:190px}
+#s2 h2{position:absolute;left:120px;top:250px;font-size:76px;font-weight:700;letter-spacing:-.01em}
+#s2 .src{position:absolute;left:120px;top:370px;font-size:30px;color:var(--mute)}
+#s2 .axes{position:absolute;left:120px;right:120px;top:520px;display:grid;grid-template-columns:repeat(4,1fr);gap:40px}
+.axis{border-top:6px solid var(--ink);padding-top:26px}
+.axis .w{font-family:'Playfair Display',serif;font-size:150px;font-weight:800;line-height:1;color:var(--ink)}
+.axis .w small{font-size:40px;color:var(--mute);font-weight:400;margin-left:6px}
+.axis .n{font-size:38px;font-weight:600;margin-top:18px}
+.axis .e{font-size:24px;color:var(--car);margin-top:8px}
+/* s3 */
+#s3 .num{position:absolute;left:120px;top:190px}
+#s3 .big{position:absolute;left:110px;top:250px;font-size:250px;font-weight:900;line-height:1;letter-spacing:-.04em}
+#s3 .score{position:absolute;left:120px;top:560px;font-family:'Playfair Display',serif;font-size:120px;font-weight:800;color:var(--car);line-height:1}
+#s3 .score small{font-size:44px;color:var(--mute);font-weight:400}
+#s3 .rank{position:absolute;left:120px;top:720px;font-size:34px;font-weight:600}
+#s3 .rank i{font-style:normal;color:var(--mute);font-weight:400;font-size:28px}
+#s3 .bars{position:absolute;left:1000px;width:800px;top:270px}
+.bar{margin-bottom:34px}
+.bar .t{display:flex;justify-content:space-between;font-size:30px;margin-bottom:12px}
+.bar .t b{font-family:'Playfair Display',serif;font-weight:600}
+.bar .track{height:22px;background:rgba(43,29,20,.08)}
+.bar .fill{height:100%;background:var(--sage);transform-origin:left}
+.bar.top .fill{background:var(--car)}
+.bar.top .t{font-weight:700;color:var(--car)}
+/* s4 */
+#s4 .num{position:absolute;left:120px;top:190px}
+#s4 h2{position:absolute;left:120px;top:240px;font-size:60px;font-weight:700}
+#s4 .grid{position:absolute;left:120px;right:120px;top:400px;display:grid;grid-template-columns:1.25fr 1fr 1fr;grid-template-rows:auto auto;column-gap:60px;row-gap:46px}
+.stat{border-top:1px solid var(--ink);padding-top:20px}
+.stat .k{font-size:26px;color:var(--mute);letter-spacing:.08em}
+.stat .v{font-family:'Playfair Display',serif;font-size:118px;font-weight:800;line-height:1.05}
+.stat .v.c{color:var(--car)}
+.stat .s{font-size:26px;margin-top:4px}
+.stat .v.kr{font-family:'Noto Serif KR',serif;font-size:76px;font-weight:900;line-height:1.5}
+.stat.wide{grid-column:span 2}
+/* s5 */
+#s5 .num{position:absolute;left:120px;top:190px}
+#s5 h2{position:absolute;left:120px;top:240px;font-size:120px;font-weight:900;letter-spacing:-.03em;line-height:1.15}
+#s5 h2 em{font-style:normal;color:var(--car)}
+#s5 ul{position:absolute;left:120px;top:560px;width:960px;list-style:none}
+#s5 li{display:flex;gap:28px;align-items:baseline;font-size:38px;padding:18px 0;border-bottom:1px solid rgba(43,29,20,.25)}
+#s5 li span{font-family:'Playfair Display',serif;color:var(--car);font-size:30px;width:40px}
+#s5 svg{position:absolute;right:110px;top:300px}
+/* s6 */
+#s6 .lab{position:absolute;left:0;right:0;top:300px;text-align:center}
+#s6 h1{position:absolute;left:0;right:0;top:370px;text-align:center;font-size:96px;font-weight:700;letter-spacing:-.02em;line-height:1.35}
+#s6 h1 em{font-style:normal;color:var(--car)}
+#s6 .en{position:absolute;left:0;right:0;top:705px;text-align:center;font-size:40px;font-weight:600;letter-spacing:.06em}
+#s6 .srcl{position:absolute;left:0;right:0;top:810px;text-align:center;font-size:24px;color:var(--mute);letter-spacing:.04em}
+#s6 svg{position:absolute;left:50%;top:180px;transform:translateX(-50%)}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="30" data-width="1920" data-height="1080">
+
+  <div id="chrome">
+    <div class="top"><span>베이커리 신규 출점 전략</span><span id="secno">01 / 06</span><span>제안 · 2026</span></div>
+    <div id="prog"><div id="progbar"></div></div>
+    <div class="bot"><span>서울 열린데이터광장</span><span>149개 상권 · 2023Q2 – 2026Q2</span></div>
+  </div>
+
+  <!-- 1 HOOK -->
+  <section class="scene" id="s1">
+    <div class="lab label">PE 포트폴리오 · 베이커리 전문점 신규 출점 전략</div>
+    <div class="rule thick" id="s1r" style="left:120px;top:300px;width:220px"></div>
+    <div class="hook">
+      <span class="line"><span>3년 뒤, 서울에서</span></span>
+      <span class="line"><span><em>빵</em>이 가장 잘 될 골목은</span></span>
+      <span class="line"><span>어디일까?</span></span>
+    </div>
+    <svg width="380" height="520" viewBox="0 0 380 520" fill="none" stroke="#B5651D" stroke-width="3" stroke-linecap="round">
+      <path class="draw" d="M190 510 C 192 380 188 250 190 40"/>
+      <g class="draw-g">
+        <path class="draw" d="M190 120 C 150 100 130 70 135 40 C 170 55 188 85 190 120"/>
+        <path class="draw" d="M190 120 C 230 100 250 70 245 40 C 210 55 192 85 190 120"/>
+        <path class="draw" d="M190 190 C 145 170 125 140 128 105 C 168 120 188 150 190 190"/>
+        <path class="draw" d="M190 190 C 235 170 255 140 252 105 C 212 120 192 150 190 190"/>
+        <path class="draw" d="M190 260 C 142 240 120 210 122 172 C 165 188 188 220 190 260"/>
+        <path class="draw" d="M190 260 C 238 240 260 210 258 172 C 215 188 192 220 190 260"/>
+        <path class="draw" d="M190 330 C 145 312 125 282 126 246 C 168 260 188 292 190 330"/>
+        <path class="draw" d="M190 330 C 235 312 255 282 254 246 C 212 260 192 292 190 330"/>
+        <path class="draw" d="M190 40 L 190 0"/>
+      </g>
+    </svg>
+  </section>
+
+  <!-- 2 METHOD -->
+  <section class="scene" id="s2">
+    <div class="num">01 — 분석 방법</div>
+    <h2><span class="line"><span>서울 열린데이터 · 149개 상권</span></span></h2>
+    <div class="src">2023 → 2026 2분기 · 4개 MECE 축 · 100점 만점 가중 평가</div>
+    <div class="axes">
+      <div class="axis"><div class="w" data-to="35">0<small>점</small></div><div class="n">수요 성장</div><div class="e">제과 매출 · 유동인구</div></div>
+      <div class="axis"><div class="w" data-to="25">0<small>점</small></div><div class="n">고객 적합성</div><div class="e">여성 · 주말 · 2030</div></div>
+      <div class="axis"><div class="w" data-to="25">0<small>점</small></div><div class="n">경쟁 여지</div><div class="e">폐업률 · 점포 밀도</div></div>
+      <div class="axis"><div class="w" data-to="15">0<small>점</small></div><div class="n">상권 모멘텀</div><div class="e">상권변화지표</div></div>
+    </div>
+  </section>
+
+  <!-- 3 ANSWER -->
+  <section class="scene" id="s3">
+    <div class="num">02 — 결론</div>
+    <div class="big"><span class="line"><span>삼청동</span></span></div>
+    <div class="score"><span id="sc">0.0</span><small> / 100</small></div>
+    <div class="rank">149개 상권 중 1위</div>
+    <div class="rule" id="s3r" style="left:1000px;top:230px;width:800px"></div>
+    <div class="bars">
+      <div class="bar top"><div class="t"><span>종로구 삼청동</span><b>84.8</b></div><div class="track"><div class="fill" data-v="84.8"></div></div></div>
+      <div class="bar"><div class="t"><span>잠실역</span><b>83.3</b></div><div class="track"><div class="fill" data-v="83.3"></div></div></div>
+      <div class="bar"><div class="t"><span>회기역</span><b>77.7</b></div><div class="track"><div class="fill" data-v="77.7"></div></div></div>
+      <div class="bar"><div class="t"><span>삼전역</span><b>77.1</b></div><div class="track"><div class="fill" data-v="77.1"></div></div></div>
+      <div class="bar"><div class="t"><span>상봉역</span><b>76.3</b></div><div class="track"><div class="fill" data-v="76.3"></div></div></div>
+    </div>
+  </section>
+
+  <!-- 4 EVIDENCE -->
+  <section class="scene" id="s4">
+    <div class="num">03 — 근거</div>
+    <h2><span class="line"><span>숫자가 말하는 삼청동</span></span></h2>
+    <div class="grid">
+      <div class="stat"><div class="k">제과 매출 CAGR</div><div class="v c"><span class="cnt" data-to="5.9" data-d="1">0.0</span>%</div><div class="s">서울 평균 1.4%의 <b>4배</b></div></div>
+      <div class="stat"><div class="k">유동인구 증가</div><div class="v">+<span class="cnt" data-to="5.2" data-d="1">0.0</span>%</div><div class="s">2023Q2 → 2026Q2</div></div>
+      <div class="stat"><div class="k">제과점 폐업률</div><div class="v"><span class="cnt" data-to="0" data-d="0">0</span>%</div><div class="s">경쟁 여지 확인</div></div>
+      <div class="stat wide"><div class="k">고객 구성 (매출 비중)</div><div class="v" style="font-size:72px;white-space:nowrap">여성 <span class="cnt" data-to="67" data-d="0">0</span>% · 주말 <span class="cnt" data-to="43" data-d="0">0</span>% · 2030 <span class="cnt" data-to="47" data-d="0">0</span>%</div></div>
+      <div class="stat"><div class="k">상권변화지표</div><div class="v kr c">‘상권확장’</div></div>
+    </div>
+  </section>
+
+  <!-- 5 CONCEPT -->
+  <section class="scene" id="s5">
+    <div class="num">04 — 콘셉트</div>
+    <h2><span class="line"><span><em>한옥</em> 쇼베이킹</span></span><span class="line"><span>플래그십</span></span></h2>
+    <ul>
+      <li><span>1</span>굽는 과정을 보여주는 오픈 키친</li>
+      <li><span>2</span>마당 좌석</li>
+      <li><span>3</span>관광객 기프트 라인</li>
+      <li><span>4</span>오후 11–17시 피크(매출의 75%) 대응</li>
+    </ul>
+    <svg width="680" height="560" viewBox="0 0 680 560" fill="none" stroke="#2B1D14" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path class="draw" d="M20 200 C 120 210 200 150 240 90 L 440 90 C 480 150 560 210 660 200"/>
+      <path class="draw" d="M60 205 C 140 205 210 175 250 130 L 430 130 C 470 175 540 205 620 205"/>
+      <path class="draw" d="M240 90 L 340 40 L 440 90"/>
+      <path class="draw" d="M110 215 L 110 470 M570 215 L 570 470 M250 215 L 250 470 M430 215 L 430 470"/>
+      <path class="draw" d="M60 470 L 620 470 M40 500 L 640 500"/>
+      <path class="draw" d="M270 260 L 410 260 L 410 440 L 270 440 Z M340 260 L 340 440 M270 350 L 410 350"/>
+      <path class="draw" stroke="#B5651D" d="M140 400 C 140 360 220 360 220 400 C 220 420 140 420 140 400 Z M155 390 L 170 380 M175 392 L 190 382 M195 394 L 208 386"/>
+      <path class="draw" stroke="#7D8B6A" d="M480 440 C 470 380 500 330 520 300 M520 300 C 540 330 560 380 545 440 M470 360 C 500 360 520 340 520 300"/>
+    </svg>
+  </section>
+
+  <!-- 6 CLOSE -->
+  <section class="scene" id="s6">
+    <svg width="300" height="90" viewBox="0 0 300 90" fill="none" stroke="#B5651D" stroke-width="3" stroke-linecap="round">
+      <path class="draw" d="M10 70 C 70 72 110 45 125 20 L 175 20 C 190 45 230 72 290 70"/>
+      <path class="draw" d="M125 20 L 150 5 L 175 20"/>
+    </svg>
+    <div class="lab label">05 — 맺음</div>
+    <h1><span class="line"><span><em>삼청동</em>에서 시작해,</span></span><span class="line"><span>3년 뒤를 굽는다.</span></span></h1>
+    <div class="rule" id="s6r" style="left:760px;top:675px;width:400px"></div>
+    <div class="en">베이커리 전문점 신규 출점 제안 · 2026</div>
+    <div class="srcl">출처: 서울시 상권분석서비스(서울 열린데이터광장), 2023Q2–2026Q2</div>
+  </section>
+
+  <div id="vign"></div>
+  <svg id="grain" width="2040" height="1200" xmlns="http://www.w3.org/2000/svg">
+    <filter id="gf"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+    <rect width="100%" height="100%" filter="url(#gf)"/>
+  </svg>
+</div>
+
+<script>
+(function(){
+  const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+  // prepare stroke drawings
+  $$('path.draw').forEach(p=>{const L=p.getTotalLength();p.style.strokeDasharray=L;p.style.strokeDashoffset=L;});
+  const tl=gsap.timeline({paused:true,defaults:{ease:'power3.out'}});
+  const E='expo.out';
+  const scenes=['#s1','#s2','#s3','#s4','#s5','#s6'];
+  // progress + grain jitter
+  tl.fromTo("#progbar",{scaleX:0},{scaleX:1,duration:30,ease:'none'},0);
+  const g={t:0};
+  tl.to(g,{t:300,duration:30,ease:'none',onUpdate(){const k=Math.floor(g.t*0.8)%7;$('#grain').style.transform=`translate(${(k*37)%60-30}px,${(k*53)%60-30}px)`;}},0);
+  scenes.forEach((s,i)=>{const st=i*5;
+    tl.set('#secno',{textContent:`0${i+1} / 06`},st);
+    tl.fromTo(s,{opacity:0},{opacity:1,duration:.6,ease:'power2.out'},st);
+    if(i<5) tl.to(s,{opacity:0,y:-30,duration:.5,ease:'power2.in'},st+4.5);
+  });
+  const lines=(s,at,stg=.12)=>tl.from($$(s+' .line>span'),{yPercent:110,duration:1.1,ease:E,stagger:stg},at);
+  // S1
+  tl.from('#s1 .lab',{opacity:0,x:-30,duration:.8},.2);
+  tl.from('#s1r',{scaleX:0,duration:.9,ease:E},.3);
+  lines('#s1',.5,.18);
+  tl.to($$('#s1 path.draw'),{strokeDashoffset:0,duration:1.4,stagger:.12,ease:'power2.inOut'},.6);
+  tl.to('#s1 .hook',{scale:1.03,transformOrigin:'left center',duration:4,ease:'none'},.5);
+  // S2
+  tl.from('#s2 .num',{opacity:0,x:-20,duration:.6},5.2);
+  lines('#s2',5.3);
+  tl.from('#s2 .src',{opacity:0,y:20,duration:.7},5.6);
+  $$('#s2 .axis').forEach((a,i)=>{const at=6.0+i*.35;
+    tl.from(a,{opacity:0,y:50,duration:.8,ease:E},at);
+    const w=$('.w',a),to=+w.dataset.to,o={v:0};
+    tl.to(o,{v:to,duration:1.1,ease:'power2.out',onUpdate(){w.innerHTML=Math.round(o.v)+'<small>점</small>';}},at+.1);
+  });
+  // S3
+  tl.from('#s3 .num',{opacity:0,x:-20,duration:.6},10.2);
+  tl.from('#s3 .big .line>span',{yPercent:110,duration:1.2,ease:E},10.3);
+  const sc={v:0};tl.to(sc,{v:84.8,duration:1.6,ease:'power2.out',onUpdate(){$('#sc').textContent=sc.v.toFixed(1);}},10.8);
+  tl.from('#s3 .score',{opacity:0,y:30,duration:.7},10.8);
+  tl.from('#s3 .rank',{opacity:0,y:20,duration:.7},11.4);
+  tl.from('#s3r',{scaleX:0,duration:.9,ease:E},10.6);
+  $$('#s3 .bar').forEach((b,i)=>{const at=11.0+i*.18;const f=$('.fill',b);
+    tl.from(b,{opacity:0,x:40,duration:.6},at);
+    tl.fromTo(f,{scaleX:0},{scaleX:(+f.dataset.v-60)/30,duration:1.3,ease:E},at+.15);
+  });
+  // S4
+  tl.from('#s4 .num',{opacity:0,x:-20,duration:.6},15.2);
+  lines('#s4',15.3);
+  $$('#s4 .stat').forEach((s,i)=>tl.from(s,{opacity:0,y:40,duration:.8,ease:E},15.7+i*.25));
+  $$('#s4 .cnt').forEach((c,i)=>{const to=+c.dataset.to,d=+c.dataset.d,o={v:0};
+    tl.to(o,{v:to,duration:1.5,ease:'power2.out',onUpdate(){c.textContent=o.v.toFixed(d);}},15.9+Math.min(i,3)*.25);});
+  // S5
+  tl.from('#s5 .num',{opacity:0,x:-20,duration:.6},20.2);
+  lines('#s5',20.3,.15);
+  tl.from($$('#s5 li'),{opacity:0,x:-40,duration:.7,stagger:.22,ease:E},21.0);
+  tl.to($$('#s5 path.draw'),{strokeDashoffset:0,duration:1.6,stagger:.15,ease:'power2.inOut'},20.4);
+  // S6
+  tl.to($$('#s6 path.draw'),{strokeDashoffset:0,duration:1.2,stagger:.2,ease:'power2.inOut'},25.2);
+  tl.from('#s6 .lab',{opacity:0,y:10,duration:.6},25.3);
+  lines('#s6',25.5,.2);
+  tl.from('#s6r',{scaleX:0,duration:1,ease:E},26.4);
+  tl.from('#s6 .en',{opacity:0,y:20,duration:.8},26.6);
+  tl.from('#s6 .srcl',{opacity:0,duration:.8},27.0);
+  tl.to('#s6 h1',{scale:1.02,duration:4.5,ease:'none'},25.5);
+  tl.to({},{duration:0},30);
+
+  window.__timelines=window.__timelines||{};
+  window.__timelines['main']=tl;
+  window.__tl=tl;
+  window.__seek=t=>{tl.seek(t,false);};
+  // standalone playback (not inside a renderer)
+  const standalone=!/[?&]render/.test(location.search) && !navigator.webdriver;
+  document.fonts.ready.then(()=>{window.__ready=true; if(standalone){tl.play(0);tl.eventCallback('onComplete',()=>tl.restart());}});
+})();
+</script>
+</body>
+</html>
