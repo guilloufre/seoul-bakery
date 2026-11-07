@@ -6,3 +6,4 @@ data/
 analysis/top10.txt
 video/.hyperframes/
 video/intro_hf.mp4
+.claude/

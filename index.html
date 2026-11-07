@@ -214,8 +214,9 @@ pre{background:var(--ink);color:var(--paper-2);padding:16px 18px;overflow-x:auto
 footer{padding:36px 0 60px;border-top:6px double var(--ink);font-family:var(--sans);font-size:12px;color:var(--ink-3)}
 
 /* ---------- present mode ---------- */
-html.present-on{scroll-snap-type:y proximity}
-.present-on section.slide,.present-on .hero,.present-on .video-sec{min-height:calc(100vh - 48px);scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center}
+html.present-on{scroll-snap-type:y mandatory;scroll-padding-top:48px}
+.present-on section.slide,.present-on .hero,.present-on .video-sec{height:calc(100vh - 48px);min-height:0;overflow:hidden;padding:20px 0;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center}
+.present-on .pm-hide{display:none}
 .present-on body{font-size:18px}
 .slide-counter{position:fixed;right:18px;bottom:16px;z-index:60;font-family:var(--sans);font-size:12px;letter-spacing:.14em;background:var(--ink);color:var(--paper);padding:6px 12px;display:none}
 .present-on .slide-counter{display:block}
@@ -449,6 +450,7 @@ html.present-on{scroll-snap-type:y proximity}
       </div>
     </div>
 
+    <div class="pm-hide">
     <hr class="rule">
     <div class="fig-title"><span>상위 10개 상권 지표 상세</span><span>분기 추정매출(억원) · 2023 2Q → 2026 2Q</span></div>
     <div class="tbl-wrap">
@@ -458,6 +460,7 @@ html.present-on{scroll-snap-type:y proximity}
       </table>
     </div>
     <p class="tbl-note">단위: 매출 억원/분기, 점포당 백만원/분기, 비중은 2026 2Q 제과 매출 기준. <span class="tag data">실측</span> 모든 값은 분석 결과 원값.</p>
+    </div>
   </div>
 </section>
 
@@ -639,7 +642,7 @@ html.present-on{scroll-snap-type:y proximity}
       <div>
         <div class="label sec-kicker">손익 시뮬레이션 · 3개 시나리오</div>
         <h2 class="action">기본 시나리오 <em>월 매출 6,000만 · 영업이익 690만(11.5%)</em> — 손익분기는 일 객수 103명, 투자회수 3.3년.</h2>
-        <p class="sec-sub">월 6,000만은 삼청동 점포당 평균(월 2,797만)의 2.1배, 인접 북촌(안국) 점포당 평균(월 4,656만)의 1.3배입니다. 30평 플래그십·오븐 쇼·기프트로 평균 점포보다 큰 몫을 가져가는 구조입니다. 이는 삼청동 상권 제과 매출(월 2.80억)의 21%로, 기존 수요를 빼앗기보다 오븐 쇼·마당·기프트로 새 수요를 만들어 확보하는 몫입니다.</p>
+        <p class="sec-sub pm-hide">월 6,000만은 삼청동 점포당 평균(월 2,797만)의 2.1배, 인접 북촌(안국) 점포당 평균(월 4,656만)의 1.3배입니다. 30평 플래그십·오븐 쇼·기프트로 평균 점포보다 큰 몫을 가져가는 구조입니다. 이는 삼청동 상권 제과 매출(월 2.80억)의 21%로, 기존 수요를 빼앗기보다 오븐 쇼·마당·기프트로 새 수요를 만들어 확보하는 몫입니다.</p>
       </div>
     </div>
 
@@ -694,7 +697,7 @@ html.present-on{scroll-snap-type:y proximity}
           </tbody>
         </table>
         </div>
-        <p class="tbl-note">정확값: 연 매출 54,000 / 72,000 / 90,720만 · EBITDA 5,520 / 16,680 / 27,408만 · 영업이익 −2,880 / 8,280 / 19,008만. 손익분기 매출 = 고정비 3,150만 ÷ 공헌이익률 64% = 4,922만.</p>
+        <p class="tbl-note pm-hide">정확값: 연 매출 54,000 / 72,000 / 90,720만 · EBITDA 5,520 / 16,680 / 27,408만 · 영업이익 −2,880 / 8,280 / 19,008만. 손익분기 매출 = 고정비 3,150만 ÷ 공헌이익률 64% = 4,922만.</p>
       </div>
       <div>
         <div class="fig-title"><span>초기 투자 5.5억</span><span>가정</span></div>
@@ -1005,11 +1008,25 @@ html.present-on{scroll-snap-type:y proximity}
 
   /* ---- present mode ---- */
   var btn=document.getElementById("presentBtn"), root=document.documentElement;
+  /* scale each slide's content so the whole slide fits one screen */
+  function fitSlides(){
+    var on=root.classList.contains("present-on");
+    units.forEach(function(u){
+      var w=u.querySelector(".wrap"); if(!w) return;
+      w.style.zoom="";
+      if(!on) return;
+      var avail=window.innerHeight-48-40, h=w.scrollHeight;
+      if(h>avail) w.style.zoom=(avail/h).toFixed(3);
+    });
+  }
   function setPresent(on){
+    var i=currentIndex();
     root.classList.toggle("present-on",on); btn.setAttribute("aria-pressed",on?"true":"false");
-    if(on){ var i=currentIndex(); units[i].scrollIntoView({behavior:"auto",block:"start"}); }
+    fitSlides();
+    units[i].scrollIntoView({behavior:"auto",block:"start"});
     onScroll();
   }
+  window.addEventListener("resize",function(){ if(root.classList.contains("present-on")) fitSlides(); });
   btn.addEventListener("click",function(){ setPresent(!root.classList.contains("present-on")); });
   function go(delta){
     var i=Math.min(units.length-1,Math.max(0,currentIndex()+delta));
