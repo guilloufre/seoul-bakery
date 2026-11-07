@@ -214,9 +214,24 @@ pre{background:var(--ink);color:var(--paper-2);padding:16px 18px;overflow-x:auto
 footer{padding:36px 0 60px;border-top:6px double var(--ink);font-family:var(--sans);font-size:12px;color:var(--ink-3)}
 
 /* ---------- present mode ---------- */
-html.present-on{scroll-snap-type:y mandatory;scroll-padding-top:48px}
+html.present-on{scroll-snap-type:y mandatory;scroll-padding-top:48px;scroll-behavior:auto}
+.present-on section.slide{scroll-margin-top:0}
 .present-on section.slide,.present-on .hero,.present-on .video-sec{height:calc(100vh - 48px);min-height:0;overflow:hidden;padding:20px 0;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center}
 .present-on .pm-hide{display:none}
+.present-on .pl-tbl th:nth-child(5),.present-on .pl-tbl td:nth-child(5){display:none}
+.present-on .s08-row{grid-template-columns:minmax(0,1fr)}
+.present-on .gates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:32px}
+.present-on .gates .fig-title{grid-column:1/-1}
+.present-on .gates .gate{border-bottom:1px solid var(--paper-3)!important}
+/* tighter vertical rhythm in present mode so the shared scale can stay large */
+.present-on .rule{margin:18px 0}
+.present-on .sec-head{margin-bottom:24px}
+.present-on th,.present-on td{padding-top:5px;padding-bottom:5px}
+.present-on .elem{padding:9px 0}
+.present-on .gate{padding:9px 0}
+.present-on .road>div{padding-top:12px;padding-bottom:12px}
+.present-on #chartWaterfall{max-height:270px}
+.present-on .so{margin-top:12px}
 .present-on body{font-size:18px}
 .slide-counter{position:fixed;right:18px;bottom:16px;z-index:60;font-family:var(--sans);font-size:12px;letter-spacing:.14em;background:var(--ink);color:var(--paper);padding:6px 12px;display:none}
 .present-on .slide-counter{display:block}
@@ -398,9 +413,9 @@ html.present-on{scroll-snap-type:y mandatory;scroll-padding-top:48px}
       </div>
     </div>
 
-    <hr class="rule">
-    <div class="fig-title"><span>스크리닝 깔때기</span><span>서울시 상권분석서비스 · 2026 2Q 기준</span></div>
-    <div class="funnel">
+    <hr class="rule pm-hide">
+    <div class="fig-title pm-hide"><span>스크리닝 깔때기</span><span>서울시 상권분석서비스 · 2026 2Q 기준</span></div>
+    <div class="funnel pm-hide">
       <div><div class="n num">5,607</div><div class="t">서울 제과점 수 (전 상권)</div></div>
       <div><div class="n num">149</div><div class="t">규모·형태 조건 충족 골목·발달상권</div></div>
       <div><div class="n num">8</div><div class="t">4축 8개 지표로 백분위 채점</div></div>
@@ -650,7 +665,7 @@ html.present-on{scroll-snap-type:y mandatory;scroll-padding-top:48px}
       <div>
         <div class="fig-title"><span>월 손익 · 3개 시나리오</span><span>단위: 만원/월</span></div>
         <div class="tbl-wrap">
-        <table>
+        <table class="pl-tbl">
           <thead><tr><th>항목</th><th>보수</th><th>기본</th><th>낙관</th><th>기본 근거</th></tr></thead>
           <tbody>
             <tr><td class="l">일 객수 (명)</td><td>100</td><td>125</td><td>150</td><td class="l">상권 일 결제 624건의 20% <span class="tag asm">가정</span></td></tr>
@@ -674,17 +689,7 @@ html.present-on{scroll-snap-type:y mandatory;scroll-padding-top:48px}
       <div>
         <div class="fig-title"><span>기본 시나리오 월 손익 워터폴</span><span>만원/월</span></div>
         <svg class="chart" id="chartWaterfall" viewBox="0 0 420 330" role="img" aria-label="기본 시나리오 손익 워터폴"></svg>
-        <div class="grid g2" style="gap:16px;margin-top:10px">
-          <div class="pull"><span class="num" style="font-size:38px">103<small style="font-size:.45em">명</small></span><span class="txt">손익분기 일 객수<br>손익분기 월 매출 4,922만 <span class="tag calc">계산</span></span></div>
-          <div class="pull"><span class="num" style="font-size:38px">2.1<small style="font-size:.45em">배</small></span><span class="txt">상권 점포당<br>평균 대비 매출 <span class="tag calc">계산</span></span></div>
-        </div>
-      </div>
-    </div>
-
-    <hr class="rule">
-    <div class="grid g-7-5" style="align-items:start">
-      <div>
-        <div class="fig-title"><span>연간 환산 &amp; 투자회수</span><span>단위: 억원/년</span></div>
+        <div class="fig-title" style="margin-top:18px"><span>연간 환산 &amp; 투자회수</span><span>단위: 억원/년</span></div>
         <div class="tbl-wrap">
         <table>
           <thead><tr><th>지표</th><th>보수</th><th>기본</th><th>낙관</th></tr></thead>
@@ -699,6 +704,14 @@ html.present-on{scroll-snap-type:y mandatory;scroll-padding-top:48px}
         </div>
         <p class="tbl-note pm-hide">정확값: 연 매출 54,000 / 72,000 / 90,720만 · EBITDA 5,520 / 16,680 / 27,408만 · 영업이익 −2,880 / 8,280 / 19,008만. 손익분기 매출 = 고정비 3,150만 ÷ 공헌이익률 64% = 4,922만.</p>
       </div>
+    </div>
+
+    <hr class="rule">
+    <div class="grid g3 col-rule" style="align-items:start">
+      <div>
+        <div class="pull"><span class="num" style="font-size:38px">103<small style="font-size:.45em">명</small></span><span class="txt">손익분기 일 객수<br>손익분기 월 매출 4,922만 <span class="tag calc">계산</span></span></div>
+        <div class="pull" style="margin-top:12px"><span class="num" style="font-size:38px">2.1<small style="font-size:.45em">배</small></span><span class="txt">상권 점포당<br>평균 대비 매출 <span class="tag calc">계산</span></span></div>
+      </div>
       <div>
         <div class="fig-title"><span>초기 투자 5.5억</span><span>가정</span></div>
         <svg class="chart" viewBox="0 0 400 120" role="img" aria-label="초기투자 구성">
@@ -707,7 +720,9 @@ html.present-on{scroll-snap-type:y mandatory;scroll-padding-top:48px}
           <text x="0" y="76" fill="#2B1D14" font-size="11">한옥 인테리어·마당</text><text x="189" y="76" fill="#2B1D14" font-size="11">오븐·쇼케이스</text><text x="305" y="76" fill="#2B1D14" font-size="11">보증금</text>
           <text x="400" y="96" fill="#5A4636" font-size="11" text-anchor="end">오픈 준비 0.3억 (초도재고·채용·런칭)</text>
         </svg>
-        <div class="so"><div class="label">시사점</div><p>보수 시나리오(일 100명)는 손익분기(103명) 바로 아래 — <b>하방은 ‘일 객수’ 하나로 관리 가능</b>합니다. 08장의 KPI 게이트가 이 숫자를 지킵니다.</p></div>
+      </div>
+      <div>
+        <div class="so" style="margin-top:0"><div class="label">시사점</div><p>보수 시나리오(일 100명)는 손익분기(103명) 바로 아래 — <b>하방은 ‘일 객수’ 하나로 관리 가능</b>합니다. 08장의 KPI 게이트가 이 숫자를 지킵니다.</p></div>
       </div>
     </div>
   </div>
@@ -733,15 +748,15 @@ html.present-on{scroll-snap-type:y mandatory;scroll-padding-top:48px}
       <div class="qq">“제과점이 7개에서 10개로 늘었다. 경쟁이 심해진다.”</div>
       <div class="aa">맞습니다. 점포당 분기매출은 1.01억 → 0.84억으로 17% 낮아졌습니다 <span class="tag calc">계산</span>. 그러나 <b>폐업률 0%</b> — 새로 들어온 가게가 모두 살아남을 만큼 판이 커졌고(상권 매출 +18.7%), 상권변화지표도 ‘상권확장’입니다 <span class="tag data">실측</span>. 그래서 우리는 평균 소형 점포로 들어가지 않고, 오븐 쇼·마당·기프트로 <b>차별화된 플래그십</b>으로 들어갑니다.</div>
     </div>
-    <div class="obj">
+    <div class="obj pm-hide">
       <div class="qq">“유동인구 +5.2%는 성장이라고 하기엔 작다.”</div>
       <div class="aa">상위 10개 상권 중 유동인구가 늘어난 곳은 삼청동(+5.2%)과 월곡역(+1.5%) 둘뿐이고, 나머지 8곳은 −0.2%~−13.5% 감소입니다 <span class="tag data">실측</span>. 또 핵심은 사람 수보다 <b>1인당 지출</b> — 유동인구 1인당 제과 지출이 3년간 +12.9% 늘었습니다 <span class="tag calc">계산</span>. 사람과 지갑이 함께 커지는 상권입니다.</div>
     </div>
-    <div class="obj">
+    <div class="obj pm-hide">
       <div class="qq">“요즘 베이커리는 성수다. 왜 성수가 아닌가?”</div>
       <div class="aa">성수 상권도 같은 기준으로 평가했고 <b>뚝섬역 40.2점 · 성수역 37.2점</b>입니다. 이미 성숙한 상권이라 성장이 둔화되어 제과 매출 3년 CAGR이 뚝섬역 −16.7%, 성수역 −41.6%이고, 경쟁이 붐벼 점포당 분기매출도 1,735만 · 2,856만으로 삼청동(8,392만)의 21% · 34% 수준입니다 <span class="tag data">실측</span>. 삼청동은 149개 상권 전체에서 1위입니다.</div>
     </div>
-    <div class="obj">
+    <div class="obj pm-hide">
       <div class="qq">“잠실역은 CAGR이 101%인데 왜 1순위가 아닌가?”</div>
       <div class="aa">매출이 8.0억 → 65.4억(8.2배)으로 뛰는 동안 <b>점포는 46 → 39개로 줄고 유동인구는 −5.2%</b>였습니다 <span class="tag data">실측</span>. 대형 복합몰·백화점 식품관이 만든 일회성 점프로 판단되며, 점포당 1.68억의 대형 포맷과 경쟁해야 합니다. 그래서 단독 출점이 아닌 <b>숍인숍 2호점 옵션</b>으로 둡니다(08장).</div>
     </div>
@@ -784,15 +799,15 @@ html.present-on{scroll-snap-type:y mandatory;scroll-padding-top:48px}
     </div>
 
     <hr class="rule">
-    <div class="grid g-7-5" style="align-items:start">
-      <div>
+    <div class="grid g-7-5 s08-row" style="align-items:start">
+      <div class="gates">
         <div class="fig-title"><span>KPI 게이트</span><span>오픈 후 · 미달 시 대응 사전 합의</span></div>
         <div class="gate"><div class="m num">3개월</div><div class="c">일 객수 <b>≥110명</b> · 객단가 <b>≥15,500원</b> · 주말 매출 비중 ≥40% → 미달 시 오븐 쇼 시간·시그니처 재구성</div></div>
         <div class="gate"><div class="m num">6개월</div><div class="c">월 매출 <b>≥5,500만</b> (손익분기 4,922만 상회) → 미달 시 운영시간 축소·기업 선물·온라인 판매 확대</div></div>
         <div class="gate"><div class="m num">12개월</div><div class="c">연환산 EBITDA <b>≥1.5억</b> · 재방문율 ≥25% → 통과 시 <b>2호점 추진</b></div></div>
         <div class="gate" style="border-bottom:0"><div class="m num" style="color:var(--neg)">중단</div><div class="c">9개월까지 월 매출 4,500만 미만(보수 시나리오 이하) 지속 → 매장 포맷 축소 또는 매각 옵션 검토</div></div>
       </div>
-      <div>
+      <div class="pm-hide">
         <div class="fig-title"><span>2호점 옵션</span><span>상위 10개 상권 데이터</span></div>
         <div class="card sage" style="margin-bottom:14px">
           <h3>A. 회기역 · 3위 77.7점</h3>
@@ -1008,29 +1023,16 @@ html.present-on{scroll-snap-type:y mandatory;scroll-padding-top:48px}
 
   /* ---- present mode ---- */
   var btn=document.getElementById("presentBtn"), root=document.documentElement;
-  /* scale each slide's content so the whole slide fits one screen */
+  /* one shared scale for every slide: the tallest slide sets it, so all slides have identical
+     width and the number / title / edges sit on the same lines on every slide */
   function fitSlides(){
     var on=root.classList.contains("present-on");
-    units.forEach(function(u){
-      var w=u.querySelector(".wrap"); if(!w) return;
-      w.style.zoom=""; w.style.marginLeft=""; w.style.marginRight="";
-      var shr=u.querySelector(".sec-head"); if(shr) shr.style.gridTemplateColumns="";
-      if(!on) return;
-      var avail=window.innerHeight-48-40, h=w.scrollHeight;
-      if(h>avail){
-        /* keep the content's left edge where it is unscaled, so every slide lines up vertically */
-        var left=w.getBoundingClientRect().left, pad=parseFloat(getComputedStyle(w).paddingLeft)||0, z=avail/h;
-        w.style.zoom=z.toFixed(3);
-        w.style.marginLeft=((left+pad)/z-pad).toFixed(1)+"px";
-        w.style.marginRight="0";
-        /* keep the title column at the same screen x on every slide */
-        var sh=u.querySelector(".sec-head");
-        if(sh){ var cols=getComputedStyle(sh).gridTemplateColumns.split(" ");
-          if(cols.length===2){ var gap=parseFloat(getComputedStyle(sh).columnGap)||0, base=150;
-            sh.style.gridTemplateColumns=((base+gap)/z-gap).toFixed(1)+"px minmax(0,1fr)"; } }
-      }
-      else { var sh0=u.querySelector(".sec-head"); if(sh0) sh0.style.gridTemplateColumns=""; }
-    });
+    var wraps=units.map(function(u){ var w=u.querySelector(".wrap"); if(w) w.style.zoom=""; return w; });
+    if(!on) return;
+    var avail=window.innerHeight-48-40, maxH=0;
+    wraps.forEach(function(w){ if(w) maxH=Math.max(maxH,w.scrollHeight); });
+    var z=Math.min(1,avail/maxH);
+    if(z<1) wraps.forEach(function(w){ if(w) w.style.zoom=z.toFixed(3); });
   }
   function setPresent(on){
     var i=currentIndex();
@@ -1057,7 +1059,8 @@ html.present-on{scroll-snap-type:y mandatory;scroll-padding-top:48px}
   function go(delta){
     var i=Math.min(units.length-1,Math.max(0,currentIndex()+delta));
     var t=units[i].getBoundingClientRect().top+window.scrollY-48;
-    window.scrollTo({top:t,behavior:"smooth"});
+    window.scrollTo({top:t,behavior:"auto"});
+    onScroll();
   }
   document.addEventListener("keydown",function(e){
     var tg=e.target, tn=tg&&tg.tagName;
@@ -1067,8 +1070,8 @@ html.present-on{scroll-snap-type:y mandatory;scroll-padding-top:48px}
     if(e.key==="Escape"){ togglePresent(); return; }
     if(["ArrowRight","ArrowDown","PageDown"," "].indexOf(e.key)>-1){ e.preventDefault(); go(1); }
     else if(["ArrowLeft","ArrowUp","PageUp"].indexOf(e.key)>-1){ e.preventDefault(); go(-1); }
-    else if(e.key==="Home"){ e.preventDefault(); units[0].scrollIntoView(); }
-    else if(e.key==="End"){ e.preventDefault(); units[units.length-1].scrollIntoView(); }
+    else if(e.key==="Home"){ e.preventDefault(); go(-units.length); }
+    else if(e.key==="End"){ e.preventDefault(); go(units.length); }
   });
 })();
 </script>
