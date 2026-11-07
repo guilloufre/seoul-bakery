@@ -216,6 +216,9 @@ footer{padding:36px 0 60px;border-top:6px double var(--ink);font-family:var(--sa
 /* ---------- present mode ---------- */
 html.present-on{scroll-snap-type:y mandatory;scroll-padding-top:48px;scroll-behavior:auto}
 .present-on section.slide{scroll-margin-top:0}
+.present-on .slide-unit>.wrap{box-sizing:border-box;overflow:hidden}
+.present-on .hero .wrap,.present-on .video-sec .wrap{display:flex;flex-direction:column;justify-content:flex-start}
+.present-on .hero,.present-on .video-sec{border-top:6px double var(--ink)}
 .present-on section.slide,.present-on .hero,.present-on .video-sec{height:calc(100vh - 48px);min-height:0;overflow:hidden;padding:20px 0;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center}
 .present-on .pm-hide{display:none}
 .present-on .pl-tbl th:nth-child(5),.present-on .pl-tbl td:nth-child(5){display:none}
@@ -1027,12 +1030,13 @@ html.present-on{scroll-snap-type:y mandatory;scroll-padding-top:48px;scroll-beha
      width and the number / title / edges sit on the same lines on every slide */
   function fitSlides(){
     var on=root.classList.contains("present-on");
-    var wraps=units.map(function(u){ var w=u.querySelector(".wrap"); if(w) w.style.zoom=""; return w; });
+    var wraps=units.map(function(u){ var w=u.querySelector(".wrap"); if(w){ w.style.zoom=""; w.style.height=""; w.style.width=""; } return w; });
     if(!on) return;
     var avail=window.innerHeight-48-40, maxH=0;
     wraps.forEach(function(w){ if(w) maxH=Math.max(maxH,w.scrollHeight); });
     var z=Math.min(1,avail/maxH);
-    if(z<1) wraps.forEach(function(w){ if(w) w.style.zoom=z.toFixed(3); });
+    /* identical box on every slide: same height (the tallest slide's), same width, same scale, content top-aligned */
+    wraps.forEach(function(w){ if(!w) return; w.style.height=maxH+"px"; w.style.width="100%"; if(z<1) w.style.zoom=z.toFixed(3); });
   }
   function setPresent(on){
     var i=currentIndex();
